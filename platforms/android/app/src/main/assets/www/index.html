@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="Public/css/tailstyle.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+<body>
+    <div class="init"></div>
+    <div id="navBar" class="nav-bar bg-white flex justify-around bottom-0 right-0 fixed w-full py-2 border-t-[1px] border-[#999999]"></div>
+
+    <script src="cordova.js"></script>
+    <script src="Public/js/jquery/dist/jquery.min.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-storage-compat.js"></script>
+    
+    <script src="Public/js/firebaseconfig.js"></script>
+    <script src="Public/js/partialview.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+
+    <script>
+        document.addEventListener('deviceready', onDeviceReady, false);
+
+        function onDeviceReady() {
+            console.log('Device is ready');
+            // Set persistence and then check auth state
+            firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+                .then(() => {
+                    console.log('Session persistence set');
+                    // Call checkAuthState only once here
+                    checkAuthState();
+                })
+                .catch((error) => {
+                    console.error('Error setting persistence:', error);
+                });
+        }
+
+        let isUpdatingProfile = false; // Flag to indicate profile update status
+
+        function checkAuthState() {
+            console.log('Checking auth state...');
+            firebase.auth().onAuthStateChanged((user) => {
+                if (user) {
+                    console.log('User is authenticated:', user);
+                    // Load home-inventory only if not already loaded
+                    if (!document.querySelector('.init').innerHTML.includes('home-vaca')) {
+                        loadPartialView('home-vaca', document.querySelector('.init'), true);
+                    }
+                } else {
+                    console.log('No authenticated user');
+                    // Load home-app only if not already loaded
+                    if (!document.querySelector('.init').innerHTML.includes('home-app')) {
+                        loadPartialView('home-app', document.querySelector('.init'), false);
+                    }
+                }
+            });
+        }
+
+        function hideNavBar() {
+            var navBar = document.getElementById("navBar");
+            if (navBar) {
+                navBar.style.display = "none";
+            }
+        }
+
+        function showNavBar() {
+            var navBar = document.getElementById("navBar");
+            if (navBar) {
+                navBar.style.display = "flex";
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Ensure nav-bar is loaded only once
+            if (!document.querySelector('.nav-bar').innerHTML.includes('nav-bar content')) {
+                loadPartialView('nav-bar', document.querySelector('.nav-bar'), false);
+            }
+        });
+    </script>
+
+
+</body>
+</html>

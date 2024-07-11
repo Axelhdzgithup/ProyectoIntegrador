@@ -1,0 +1,131 @@
+<div class="w-[90%] m-auto mt-5 flex flex-col gap-7">
+    <div class="flex items-center">
+        <button class="view-back absolute">
+            <img class="w-10" src="Public/Assets/arrowback.svg" alt="">
+        </button>
+        <h2 class="text-[#0073E6] font-bold text-2xl text-center w-full">New Account</h2>
+    </div>
+
+    <div>
+        <p class="text-sm font-medium text-[#B0BEC5]">Create an account to start tracking your health and setting goals</p>
+    </div>
+
+    <form id="signup-form" class="flex flex-col gap-10">
+        <div class="flex flex-col gap-4">
+            <div class="flex flex-col gap-1">
+                <span class="font-semibold">Full Name</span>
+                <input id="full-name" class="p-3 bg-[#C7E3FF] rounded-lg placeholder-[#7CB1E7] text-[#7CB1E7] font-medium placeholder:font-medium outline-none" type="text" placeholder="Doe Joe">
+            </div>
+
+            <div class="flex flex-col gap-1">
+                <span class="font-semibold">Email</span>
+                <input id="email" class="p-3 bg-[#C7E3FF] rounded-lg placeholder-[#7CB1E7] text-[#7CB1E7] font-medium placeholder:font-medium outline-none" type="email" placeholder="example@example.com">
+            </div>
+
+            <div class="flex flex-col gap-1">
+                <span class="font-semibold">Password</span>
+                <input id="password" class="p-3 bg-[#C7E3FF] rounded-lg placeholder-[#7CB1E7] text-[#7CB1E7] font-medium placeholder:font-medium outline-none" type="password" placeholder="*****************">
+            </div>
+
+            <div class="flex flex-col gap-1">
+                <span class="font-semibold">Repeat Password</span>
+                <input id="repeat-password" class="p-3 bg-[#C7E3FF] rounded-lg placeholder-[#7CB1E7] text-[#7CB1E7] font-medium placeholder:font-medium outline-none" type="password" placeholder="*****************">
+            </div>
+        </div>
+
+        <button id="register-button" class="font-semibold text-xl py-3 bg-[#0073E6] rounded-md text-white">Sign Up</button>
+    </form>
+
+    <div class="flex justify-center">
+        <span class="font-medium">Already have an account? <button class="view-sign-in font-medium text-[#0073E6]">Sign In</button></span>
+    </div>
+</div>
+
+<script>
+    auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+    .then(() => {
+      document.getElementById('signup-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const fullName = document.getElementById('full-name').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const repeatPassword = document.getElementById('repeat-password').value;
+
+        // Verificar si todos los campos están llenos
+        if (!fullName || !email || !password || !repeatPassword) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Por favor, complete todos los campos',
+          });
+          return;
+        }
+
+        // Verificar si la contraseña tiene al menos 6 caracteres
+        if (password.length < 6) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'La contraseña debe tener al menos 6 caracteres',
+          });
+          return;
+        }
+
+        // Verificar si las contraseñas coinciden
+        if (password !== repeatPassword) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Las contraseñas no coinciden',
+          });
+          return;
+        }
+
+        auth.createUserWithEmailAndPassword(email, password)
+          .then((userCredential) => {
+            const user = userCredential.user;
+
+            return db.collection('users').doc(user.uid).set({
+              fullName: fullName,
+              email: email
+            });
+          })
+          .then(() => {
+            Swal.fire({
+              icon: 'success',
+              title: 'Registro Exitoso',
+              text: 'Usuario registrado exitosamente',
+              timer: 2000,
+              showConfirmButton: false
+            }).then(() => {
+              loadPartialView('home-main', document.querySelector('.init'), false);
+            });
+          })
+          .catch((error) => {
+            console.error('Error al registrar el usuario:', error);
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'Error al registrar el usuario: ' + error.message,
+            });
+          });
+      });
+    })
+    .catch((error) => {
+      console.error('Error al configurar la persistencia de la sesión:', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Error al configurar la persistencia de la sesión: ' + error.message,
+      });
+    });
+
+  document.querySelector('.view-back').addEventListener('click', function() {
+    loadPartialView('home-app', document.querySelector('.init'), false);
+  });
+
+  document.querySelector('.view-sign-in').addEventListener('click', function() {
+    loadPartialView('sign-in', document.querySelector('.init'), false);
+  });
+</script>

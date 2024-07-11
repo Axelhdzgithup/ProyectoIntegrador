@@ -1,0 +1,133 @@
+<div class="w-[90%] m-auto mt-5 flex flex-col gap-7">
+    <div class="flex items-center">
+        <button class="view-back absolute">
+            <img class="w-10" src="Public/Assets/arrowback.svg" alt="">
+        </button>
+        <h2 class="text-[#0073E6] font-bold text-2xl text-center w-full">New Account</h2>
+    </div>
+
+    <div>
+        <p class="text-sm font-medium text-[#B0BEC5]">Create an account to start tracking your health and setting goals</p>
+    </div>
+
+    <form id="signup-form" class="flex flex-col gap-10">
+        <div class="flex flex-col gap-4">
+            <div class="flex flex-col gap-1">
+                <span class="font-semibold">Full Name</span>
+                <input id="full-name" class="p-3 bg-[#C7E3FF] rounded-lg placeholder-[#7CB1E7] text-[#7CB1E7] font-medium placeholder:font-medium outline-none" type="text" placeholder="Doe Joe">
+            </div>
+
+            <div class="flex flex-col gap-1">
+                <span class="font-semibold">Email</span>
+                <input id="email" class="p-3 bg-[#C7E3FF] rounded-lg placeholder-[#7CB1E7] text-[#7CB1E7] font-medium placeholder:font-medium outline-none" type="email" placeholder="example@example.com">
+            </div>
+
+            <div class="flex flex-col gap-1">
+                <span class="font-semibold">Password</span>
+                <input id="password" class="p-3 bg-[#C7E3FF] rounded-lg placeholder-[#7CB1E7] text-[#7CB1E7] font-medium placeholder:font-medium outline-none" type="password" placeholder="*****************">
+            </div>
+
+            <div class="flex flex-col gap-1">
+                <span class="font-semibold">Repeat Password</span>
+                <input id="repeat-password" class="p-3 bg-[#C7E3FF] rounded-lg placeholder-[#7CB1E7] text-[#7CB1E7] font-medium placeholder:font-medium outline-none" type="password" placeholder="*****************">
+            </div>
+        </div>
+
+        <button id="register-button" class="font-semibold text-xl py-3 bg-[#0073E6] rounded-md text-white">Sign Up</button>
+    </form>
+
+    <div class="flex justify-center">
+        <span class="font-medium">Already have an account? <button class="view-log-in font-medium text-[#0073E6]">Sign In</button></span>
+    </div>
+</div>
+
+
+<script>
+
+    document.getElementById('register-button').addEventListener('click', function(e) {
+            e.preventDefault();
+
+            const userName = document.getElementById('full-name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const repeatPassword = document.getElementById('repeat-password').value;
+
+            if (!userName || !email || !password || !repeatPassword) {
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Please complete all fields.',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+                return;
+            }
+
+            if (password !== repeatPassword) {
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Passwords do not match.',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+                return;
+            }
+
+            auth.createUserWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+
+                    return db.collection('users').doc(user.uid).set({
+                        name: userName,
+                        email: user.email
+                    });
+                })
+                .then(() => {
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'User registered successfully',
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    }).then(() => {
+                        localStorage.setItem('user', JSON.stringify(user));
+                        loadPartialView('home-vaca', document.querySelector('.init'), false);
+                    });
+                })
+                .catch((error) => {
+                    let alertMessage = error.message;
+
+                    switch (error.code) {
+                        case 'auth/email-already-in-use':
+                            alertMessage = 'The email address is already in use.';
+                            break;
+                        case 'auth/invalid-email':
+                            alertMessage = 'The email address is not valid.';
+                            break;
+                        case 'auth/operation-not-allowed':
+                            alertMessage = 'Email and password authentication is not enabled.';
+                            break;
+                        case 'auth/weak-password':
+                            alertMessage = 'Password should be at least 6 characters.';
+                            break;
+                        default:
+                            alertMessage = 'An error occurred while registering the user.';
+                            break;
+                    }
+
+                    Swal.fire({
+                        title: 'Error!',
+                        text: alertMessage,
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    });
+                });
+        });
+
+        const user = localStorage.getItem('user');
+        if (user) {
+            loadPartialView('prueba', document.querySelector('.init'), false);
+        }
+
+        document.querySelector('.view-back').addEventListener('click',function(){
+        loadPartialView('home-app',document.querySelector('.init'), false);
+    })
+</script>

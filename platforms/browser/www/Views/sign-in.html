@@ -1,0 +1,99 @@
+<div class="w-[90%] m-auto mt-5 flex flex-col gap-7">
+    <div class="flex items-center">
+        <button class="view-back absolute">
+            <img class="w-10" src="Public/Assets/arrowback.svg" alt="">
+        </button>
+        <h2 class="text-[#0073E6] font-bold text-2xl text-center w-full">Hello!</h2>
+    </div>
+
+    <div class="flex flex-col gap-3">
+        <h2 class="text-[#0073E6] font-bold text-2xl">Welcome</h2>
+        <p class="text-sm font-medium text-[#B0BEC5]">Sign in to continue tracking your health and achieving your wellness goals</p>
+    </div>
+
+    <form id="signin-form" class="flex flex-col gap-10">
+        <div class="flex flex-col gap-4">
+            <div class="flex flex-col gap-1">
+                <span class="font-semibold">Email</span>
+                <input class="p-3 bg-[#C7E3FF] rounded-lg placeholder-[#7CB1E7] text-[#7CB1E7] font-medium placeholder:font-medium outline-none" type="email" id="email" placeholder="example@example.com">
+            </div>
+            <div class="flex flex-col gap-1">
+                <span class="font-semibold">Password</span>
+                <input class="p-3 bg-[#C7E3FF] rounded-lg placeholder-[#7CB1E7] text-[#7CB1E7] font-medium placeholder:font-medium outline-none" type="password" id="password" placeholder="*****************">
+            </div>
+        </div>
+
+        <button id="login-button" class="font-semibold text-xl py-3 bg-[#0073E6] rounded-md text-white">Sign In</button>
+    </form>
+
+    <div class="flex justify-center">
+        <span class="font-medium">Don't have an account? <button class="font-medium text-[#0073E6] view-sign-up">Sign Up</button></span>
+    </div>
+</div>
+
+
+<script>
+    auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+        .then(() => {
+            document.getElementById('signin-form').addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+
+                // Verificar si todos los campos están llenos
+                if (!email || !password) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Por favor, complete todos los campos',
+                    });
+                    return;
+                }
+
+                auth.signInWithEmailAndPassword(email, password)
+                    .then((userCredential) => {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Inicio de Sesión Exitoso',
+                            text: 'Bienvenido de nuevo',
+                            timer: 2000,
+                            showConfirmButton: false
+                        }).then(() => {
+                            loadPartialView('home-main', document.querySelector('.init'), false);
+                        });
+                    })
+                    .catch((error) => {
+                        console.error('Error al iniciar sesión:', error);
+                        // Mostrar mensaje de error en español para credenciales inválidas
+                        let errorMessage = 'Error al iniciar sesión: ' + error.message;
+
+                        if (error.code === 'auth/invalid-login-credentials') {
+                            errorMessage = 'Credenciales inválidas. Verifique su correo electrónico y contraseña.';
+                        }
+
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: errorMessage,
+                        });
+                    });
+            });
+        })
+        .catch((error) => {
+            console.error('Error al configurar la persistencia de la sesión:', error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Error al configurar la persistencia de la sesión: ' + error.message,
+            });
+        });
+
+    document.querySelector('.view-back').addEventListener('click', function() {
+        loadPartialView('home-app', document.querySelector('.init'), false);
+    });
+
+    document.querySelector('.view-sign-up').addEventListener('click', function() {
+        loadPartialView('sign-up', document.querySelector('.init'), false);
+    });
+</script>

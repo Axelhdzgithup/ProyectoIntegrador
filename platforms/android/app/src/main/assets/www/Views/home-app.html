@@ -1,0 +1,25 @@
+<div class="w-[90%] m-auto mt-10 flex flex-col gap-24">
+    <div class="w-[85%] m-auto">
+        <h2 class="text-4xl w-full text-center  text-[#0073e6] font-bold">Welcome to MyHealthPal</h2>
+    </div>
+
+    <div class="w-[90%] m-auto">
+        <img class="m-auto" src="Public/Assets/care.webp" alt="">
+    </div>
+
+    <div class="w-[85%] m-auto flex flex-col gap-6">
+        <button class="view-sign-in w-full bg-[#0073E6] text-white font-semibold text-xl py-3 rounded-md">Sign In</button>
+        <button class="view-sign-up w-full text-[#0073E6] border-2 border-[#0073E6] font-semibold text-xl py-3 rounded-md">Sign Up</button>
+    </div>
+</div>
+
+
+<script>
+    document.querySelector('.view-sign-in').addEventListener('click',function(){
+        loadPartialView('sign-in',document.querySelector('.init'), false);
+    })
+
+    document.querySelector('.view-sign-up').addEventListener('click',function(){
+        loadPartialView('sign-up',document.querySelector('.init'), false);
+    })
+</script>
