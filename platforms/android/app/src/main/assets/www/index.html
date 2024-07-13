@@ -24,46 +24,42 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
-
     <script>
         document.addEventListener('deviceready', onDeviceReady, false);
-
+    
         function onDeviceReady() {
             console.log('Device is ready');
-            // Set persistence and then check auth state
             firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
                 .then(() => {
-                    console.log('Session persistence set');
-                    // Call checkAuthState only once here
+                    console.log('Auth Activado');
                     checkAuthState();
                 })
                 .catch((error) => {
                     console.error('Error setting persistence:', error);
                 });
         }
-
-        let isUpdatingProfile = false; // Flag to indicate profile update status
-
+    
+    
         function checkAuthState() {
             console.log('Checking auth state...');
             firebase.auth().onAuthStateChanged((user) => {
                 if (user) {
-                    console.log('User is authenticated:', user);
-                    // Load home-inventory only if not already loaded
-                    if (!document.querySelector('.init').innerHTML.includes('home-vaca')) {
-                        loadPartialView('home-vaca', document.querySelector('.init'), true);
+                    console.log('Usuario autenticado:', user);
+                    if (!document.querySelector('.init').innerHTML.includes('home-main')) {
+                        document.querySelector('.init').innerHTML = '';
+                        loadPartialView('home-main', document.querySelector('.init'), true);
                     }
                 } else {
-                    console.log('No authenticated user');
-                    // Load home-app only if not already loaded
+                    console.log('Usuario no autenticado');
                     if (!document.querySelector('.init').innerHTML.includes('home-app')) {
+                        document.querySelector('.init').innerHTML = '';
                         loadPartialView('home-app', document.querySelector('.init'), false);
                     }
                 }
             });
         }
 
-        function hideNavBar() {
+        /* function hideNavBar() {
             var navBar = document.getElementById("navBar");
             if (navBar) {
                 navBar.style.display = "none";
@@ -82,9 +78,10 @@
             if (!document.querySelector('.nav-bar').innerHTML.includes('nav-bar content')) {
                 loadPartialView('nav-bar', document.querySelector('.nav-bar'), false);
             }
-        });
+        }); */
     </script>
-
+    
+ 
 
 </body>
 </html>

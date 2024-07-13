@@ -11,7 +11,7 @@
         <p class="text-sm font-medium text-[#B0BEC5]">Sign in to continue tracking your health and achieving your wellness goals</p>
     </div>
 
-    <form class="flex flex-col gap-10" action="">
+    <form id="signin-form" class="flex flex-col gap-10">
         <div class="flex flex-col gap-4">
             <div class="flex flex-col gap-1">
                 <span class="font-semibold">Email</span>
@@ -27,80 +27,71 @@
     </form>
 
     <div class="flex justify-center">
-        <span class="font-medium">Don't have an account? <button class="font-medium text-[#0073E6] view-create-account">Sign Up</button></span>
+        <span class="font-medium">Don't have an account? <button class="font-medium text-[#0073E6] view-sign-up">Sign Up</button></span>
     </div>
 </div>
 
+
 <script>
-    document.querySelector('.view-create-account').addEventListener('click', function() {
-        loadPartialView('create-account', document.querySelector('.init'), false);
-    });
+    auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+        .then(() => {
+            document.getElementById('signin-form').addEventListener('submit', function(event) {
+                event.preventDefault();
 
-    $(document).ready(function() {
-        $('#login-button').on('click', function(e) {
-            e.preventDefault();
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
 
-            const email = $('#email').val();
-            const password = $('#password').val();
-
-            if (!email || !password) {
-                Swal.fire({
-                    title: 'Error!',
-                    text: 'Please fill in all fields.',
-                    icon: 'error',
-                    confirmButtonText: 'OK'
-                });
-                return;
-            }
-
-            auth.signInWithEmailAndPassword(email, password)
-                .then((userCredential) => {
+                if (!email || !password) {
                     Swal.fire({
-                        title: 'Success!',
-                        text: 'Login successful',
-                        icon: 'success',
-                        confirmButtonText: 'OK'
-                    }).then(() => {
-                        localStorage.setItem('user', JSON.stringify(userCredential.user));
-                        loadPartialView('prueba', document.querySelector('.init'), false);
-                    });
-                })
-                .catch((error) => {
-                    const errorCode = error.code;
-                    const errorMessage = error.message;
-                    let alertMessage = errorMessage;
-
-                    switch (errorCode) {
-                        case 'auth/user-not-found':
-                            alertMessage = 'No account found with that email.';
-                            break;
-                        case 'auth/wrong-password':
-                            alertMessage = 'Incorrect password.';
-                            break;
-                        case 'auth/invalid-email':
-                            alertMessage = 'The email address is not valid.';
-                            break;
-                        default:
-                            alertMessage = 'There was an error logging in.';
-                            break;
-                    }
-
-                    Swal.fire({
-                        title: 'Error!',
-                        text: alertMessage,
                         icon: 'error',
-                        confirmButtonText: 'OK'
+                        title: 'Error',
+                        text: 'Por favor, complete todos los campos',
                     });
-                });
+                    return;
+                }
+
+                auth.signInWithEmailAndPassword(email, password)
+                    .then((userCredential) => {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Inicio de Sesión Exitoso',
+                            text: 'Bienvenido de nuevo',
+                            timer: 2000,
+                            showConfirmButton: false
+                        }).then(() => {
+                            loadPartialView('home-main', document.querySelector('.init'), false);
+                        });
+                    })
+                    .catch((error) => {
+                        console.error('Error al iniciar sesión:', error);
+                        let errorMessage = 'Error al iniciar sesión: ' + error.message;
+
+                        if (error.code === 'auth/invalid-login-credentials') {
+                            errorMessage = 'Credenciales inválidas. Verifique su correo electrónico y contraseña.';
+                        }
+
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: errorMessage,
+                        });
+                    });
+            });
+        })
+        .catch((error) => {
+            console.error('Error al configurar la persistencia de la sesión:', error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Error al configurar la persistencia de la sesión: ' + error.message,
+            });
         });
 
-        const user = localStorage.getItem('user');
-        if (user) {
-            loadPartialView('prueba', document.querySelector('.init'), false);
-        }
+    document.querySelector('.view-back').addEventListener('click', function() {
+        loadPartialView('home-app', document.querySelector('.init'), false);
     });
 
-    document.querySelector('.view-back').addEventListener('click',function(){
-        loadPartialView('home-app',document.querySelector('.init'), false);
-    })
+    document.querySelector('.view-sign-up').addEventListener('click', function() {
+        loadPartialView('sign-up', document.querySelector('.init'), false);
+    });
 </script>

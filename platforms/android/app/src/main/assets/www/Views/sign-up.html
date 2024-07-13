@@ -37,97 +37,92 @@
     </form>
 
     <div class="flex justify-center">
-        <span class="font-medium">Already have an account? <button class="view-log-in font-medium text-[#0073E6]">Sign In</button></span>
+        <span class="font-medium">Already have an account? <button class="view-sign-in font-medium text-[#0073E6]">Sign In</button></span>
     </div>
 </div>
 
-
 <script>
+    auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+    .then(() => {
+      document.getElementById('signup-form').addEventListener('submit', function(event) {
+        event.preventDefault();
 
-    document.getElementById('register-button').addEventListener('click', function(e) {
-            e.preventDefault();
+        const fullName = document.getElementById('full-name').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const repeatPassword = document.getElementById('repeat-password').value;
 
-            const userName = document.getElementById('full-name').value;
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const repeatPassword = document.getElementById('repeat-password').value;
-
-            if (!userName || !email || !password || !repeatPassword) {
-                Swal.fire({
-                    title: 'Error!',
-                    text: 'Please complete all fields.',
-                    icon: 'error',
-                    confirmButtonText: 'OK'
-                });
-                return;
-            }
-
-            if (password !== repeatPassword) {
-                Swal.fire({
-                    title: 'Error!',
-                    text: 'Passwords do not match.',
-                    icon: 'error',
-                    confirmButtonText: 'OK'
-                });
-                return;
-            }
-
-            auth.createUserWithEmailAndPassword(email, password)
-                .then((userCredential) => {
-                    const user = userCredential.user;
-
-                    return db.collection('users').doc(user.uid).set({
-                        name: userName,
-                        email: user.email
-                    });
-                })
-                .then(() => {
-                    Swal.fire({
-                        title: 'Success!',
-                        text: 'User registered successfully',
-                        icon: 'success',
-                        confirmButtonText: 'OK'
-                    }).then(() => {
-                        localStorage.setItem('user', JSON.stringify(user));
-                        loadPartialView('home-vaca', document.querySelector('.init'), false);
-                    });
-                })
-                .catch((error) => {
-                    let alertMessage = error.message;
-
-                    switch (error.code) {
-                        case 'auth/email-already-in-use':
-                            alertMessage = 'The email address is already in use.';
-                            break;
-                        case 'auth/invalid-email':
-                            alertMessage = 'The email address is not valid.';
-                            break;
-                        case 'auth/operation-not-allowed':
-                            alertMessage = 'Email and password authentication is not enabled.';
-                            break;
-                        case 'auth/weak-password':
-                            alertMessage = 'Password should be at least 6 characters.';
-                            break;
-                        default:
-                            alertMessage = 'An error occurred while registering the user.';
-                            break;
-                    }
-
-                    Swal.fire({
-                        title: 'Error!',
-                        text: alertMessage,
-                        icon: 'error',
-                        confirmButtonText: 'OK'
-                    });
-                });
-        });
-
-        const user = localStorage.getItem('user');
-        if (user) {
-            loadPartialView('prueba', document.querySelector('.init'), false);
+        if (!fullName || !email || !password || !repeatPassword) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Por favor, complete todos los campos',
+          });
+          return;
         }
 
-        document.querySelector('.view-back').addEventListener('click',function(){
-        loadPartialView('home-app',document.querySelector('.init'), false);
+        if (password.length < 6) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'La contraseña debe tener al menos 6 caracteres',
+          });
+          return;
+        }
+
+        if (password !== repeatPassword) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Las contraseñas no coinciden',
+          });
+          return;
+        }
+
+        auth.createUserWithEmailAndPassword(email, password)
+          .then((userCredential) => {
+            const user = userCredential.user;
+
+            return db.collection('users').doc(user.uid).set({
+              fullName: fullName,
+              email: email
+            });
+          })
+          .then(() => {
+            Swal.fire({
+              icon: 'success',
+              title: 'Registro Exitoso',
+              text: 'Usuario registrado exitosamente',
+              timer: 2000,
+              showConfirmButton: false
+            }).then(() => {
+              loadPartialView('home-main', document.querySelector('.init'), false);
+            });
+          })
+          .catch((error) => {
+            console.error('Error al registrar el usuario:', error);
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'Error al registrar el usuario: ' + error.message,
+            });
+          });
+      });
     })
+    .catch((error) => {
+      console.error('Error al configurar la persistencia de la sesión:', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Error al configurar la persistencia de la sesión: ' + error.message,
+      });
+    });
+
+  document.querySelector('.view-back').addEventListener('click', function() {
+    loadPartialView('home-app', document.querySelector('.init'), false);
+  });
+
+  document.querySelector('.view-sign-in').addEventListener('click', function() {
+    loadPartialView('sign-in', document.querySelector('.init'), false);
+  });
 </script>

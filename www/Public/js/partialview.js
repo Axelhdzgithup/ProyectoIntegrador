@@ -1,17 +1,17 @@
-function loadPartialView(viewName, divClass = null, isAppend = false){
-    var showNavBarViews = ['home-vaca', 'ganado', 'profile']; // Lista de vistas en las que se mostrará el nav-bar
-    
+function loadPartialView(viewName, divClass = null, isAppend = false) {
+    var showNavBarViews = ['home-main', 'ganado', 'profile']; // Lista de vistas en las que se mostrará el nav-bar
+
     $.ajax({
         url: 'Views/' + viewName + '.html',
         method: 'GET',
-        success: function(data){
+        success: function (data) {
             if (divClass === null) {
                 console.error('Elemento contenedor (divClass) no definido');
                 return;
             }
 
             isAppend ? $(divClass).append(data) : $(divClass).html(data);
-            
+
             // Si la vista está en la lista de vistas a mostrar, muestra el nav-bar
             if (showNavBarViews.includes(viewName)) {
                 showNavBar();
@@ -19,7 +19,7 @@ function loadPartialView(viewName, divClass = null, isAppend = false){
                 hideNavBar();
             }
         },
-        error: function(xhr, status, error) {
+        error: function (xhr, status, error) {
             console.error('Error al cargar la vista parcial:', error);
         }
     })
