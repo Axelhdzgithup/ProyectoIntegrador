@@ -33,7 +33,3 @@ module.exports = {
   },
   plugins: [],
 }
-
-// npm install jquery
-// npm install -D tailwindcss
-// npx tailwindcss init
