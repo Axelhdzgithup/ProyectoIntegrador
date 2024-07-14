@@ -41,7 +41,6 @@
                 const email = document.getElementById('email').value;
                 const password = document.getElementById('password').value;
 
-                // Verificar si todos los campos están llenos
                 if (!email || !password) {
                     Swal.fire({
                         icon: 'error',
@@ -65,7 +64,6 @@
                     })
                     .catch((error) => {
                         console.error('Error al iniciar sesión:', error);
-                        // Mostrar mensaje de error en español para credenciales inválidas
                         let errorMessage = 'Error al iniciar sesión: ' + error.message;
 
                         if (error.code === 'auth/invalid-login-credentials') {
