@@ -59,7 +59,7 @@
             });
         }
 
-        /* function hideNavBar() {
+        function hideNavBar() {
             var navBar = document.getElementById("navBar");
             if (navBar) {
                 navBar.style.display = "none";
@@ -78,7 +78,9 @@
             if (!document.querySelector('.nav-bar').innerHTML.includes('nav-bar content')) {
                 loadPartialView('nav-bar', document.querySelector('.nav-bar'), false);
             }
-        }); */
+        }); 
+
+        loadPartialView('article', document.querySelector('.init'), false);
     </script>
     
  
