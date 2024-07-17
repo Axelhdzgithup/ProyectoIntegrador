@@ -1,5 +1,5 @@
-<div class="container mx-auto p-4 text-white">
-    <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+<div class="container mx-auto p-4 text-white mb-16">
+    <div class="bg-gray-800 p-6 rounded-lg shadow-lg mb-8">
         <h1 class="text-xl font-bold mb-4">Peso y IMC</h1>
         
         <div class="flex justify-between mb-4">
@@ -28,11 +28,35 @@
 
         <button class="view-diario-in w-full py-2 bg-light-slate-blue rounded-lg font-semibold mt-4">+ Añadir</button>
     </div>
+
+
+<div class="bg-gray-800 p-6 rounded-lg shadow-lg mb-8">
+    <h2 class="text-lg font-bold mb-4">Recordatorios de Medicamentos</h2>
+    
+    <form id="medicationForm">
+        <div class="mb-4">
+            <label for="medicationName" class="block mb-2">Nombre del Medicamento</label>
+            <input type="text" id="medicationName" class="w-full p-2 rounded-lg bg-gray-700 text-white">
+        </div>
+        
+        <div class="mb-4">
+            <label for="medicationTime" class="block mb-2">Hora del Recordatorio</label>
+            <input type="time" id="medicationTime" class="w-full p-2 rounded-lg bg-gray-700 text-white">
+        </div>
+        
+        <button type="button" id="addReminderBtn" class="w-full py-2 bg-light-slate-blue rounded-lg font-semibold">Añadir Recordatorio</button>
+    </form>
+    
+    <div id="remindersList" class="mt-4">
+        <h3 class="text-md font-semibold mb-2">Recordatorios:</h3>
+        <ul id="remindersUl" class="list-disc pl-5"></ul>
+    </div>
+</div>
 </div>
 
 <nav class="fixed bottom-0 left-0 w-full bg-white shadow-md md:hidden">
     <div class="max-w-md mx-auto flex justify-around py-2">
-        <button class="flex flex-col items-center text-gray-600 hover:text-violet-blue active">
+        <button class="view-home-main flex flex-col items-center text-gray-600 hover:text-violet-blue active">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
             </svg>                  
@@ -40,29 +64,18 @@
         </button>
 
         <button class="view-article flex flex-col items-center text-black hover:text-violet-blue">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.76c0 1.6 1.123 2.994 2.707 3.227 1.068.157 2.148.279 3.238.364.466.037.893.281 1.153.671L12 21l2.652-3.978c.26-.39.687-.634 1.153-.67 1.09-.086 2.17-.208 3.238-.365 1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" />
-            </svg>                  
+            <img src="../Public/Assets/navbar/diario.svg" alt="diario Icon" class="size-6">                     
             <span class="text-sm">Articulos</span>
         </button>
 
         
         <div class="view-diario flex flex-col items-center text-black hover:text-violet-blue">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0M3.124 7.5A8.969 8.969 0 0 1 5.292 3m13.416 0a8.969 8.969 0 0 1 2.168 4.5" />
-              </svg>                  
-            <span class="text-sm">Notificaciones</span>
+            <img src="../Public/Assets/navbar/bmi.svg" alt="IMC Icon" class="size-6">          
+            <span class="text-sm">IMC</span>
         </div>
-        <a href="profile.html" class="flex flex-col items-center text-black hover:text-violet-blue">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-            </svg>                  
-            <span class="text-sm">Perfil</span>
-        </a>
-        <button href="#" id="logout-button" class="flex flex-col items-center text-black hover:text-violet-blue">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 19.5v-15M5.25 12l6.75-6.75M5.25 12l6.75 6.75" />
-            </svg>                  
+        
+        <button id="logout-button" class="flex flex-col items-center text-black hover:text-violet-blue">
+            <img src="../Public/Assets/navbar/out.svg" alt="IMC Icon" class="size-6">                  
             <span class="text-sm">Cerrar Sesión</span>
         </button>
     </div>
@@ -73,6 +86,10 @@
     document.querySelector('.view-article').addEventListener('click', function(){
         loadPartialView('article-main', document.querySelector('.init'), false);
     });
+
+    document.querySelector('.view-home-main').addEventListener('click',function(){
+        loadPartialView('home-main',document.querySelector('.init'), false);
+    })
 
     document.querySelector('.view-diario-in').addEventListener('click', function(){
         loadPartialView('diario-in', document.querySelector('.init'), false);
@@ -213,4 +230,58 @@
             console.error('Error al cerrar sesión:', error);
         });
     });
+</script>
+<script>
+ 
+ document.addEventListener('DOMContentLoaded', function() {
+    const addReminderBtn = document.getElementById('addReminderBtn');
+    const remindersUl = document.getElementById('remindersUl');
+
+    addReminderBtn.addEventListener('click', function() {
+        const medicationName = document.getElementById('medicationName').value;
+        const medicationTime = document.getElementById('medicationTime').value;
+
+        if (medicationName && medicationTime) {
+            const li = document.createElement('li');
+            li.textContent = `${medicationName} - ${medicationTime}`;
+            remindersUl.appendChild(li);
+
+            // Aquí puedes agregar la lógica para guardar el recordatorio en la base de datos de Firebase o en el almacenamiento local
+
+            // Limpiar el formulario
+            document.getElementById('medicationForm').reset();
+        } else {
+            alert('Por favor, completa todos los campos.');
+        }
+    });
+});
+
+
+addReminderBtn.addEventListener('click', function() {
+    const medicationName = document.getElementById('medicationName').value;
+    const medicationTime = document.getElementById('medicationTime').value;
+
+    if (medicationName && medicationTime) {
+        const li = document.createElement('li');
+        li.textContent = `${medicationName} - ${medicationTime}`;
+        remindersUl.appendChild(li);
+
+        // Guardar el recordatorio en Firestore
+        db.collection('reminders').add({
+            medicationName: medicationName,
+            medicationTime: medicationTime,
+            userId: firebase.auth().currentUser.uid // Suponiendo que estás usando autenticación
+        }).then(() => {
+            console.log('Recordatorio añadido correctamente.');
+        }).catch((error) => {
+            console.error('Error añadiendo recordatorio: ', error);
+        });
+
+        // Limpiar el formulario
+        document.getElementById('medicationForm').reset();
+    } else {
+        alert('Por favor, completa todos los campos.');
+    }
+});
+
 </script>
