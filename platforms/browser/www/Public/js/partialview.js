@@ -25,12 +25,3 @@ function loadPartialView(viewName, divClass = null, isAppend = false) {
     })
 }
 
-function hideNavBar() {
-    var navBar = document.getElementById("navBar");
-    navBar.style.display = "none";
-}
-
-function showNavBar() {
-    var navBar = document.getElementById("navBar");
-    navBar.style.display = "flex";
-}

@@ -1,0 +1,176 @@
+<div class="container mx-auto p-4 text-white">
+    <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+        <h1 class="text-xl font-bold mb-4">Nuevo Registro</h1>
+        <form id="imcForm" class="space-y-4">
+            <div>
+                <label for="peso" class="block text-sm font-medium">Peso (kg)</label>
+                <input type="number" id="peso" class="w-full mt-1 p-2 bg-gray-700 rounded-lg" required>
+            </div>
+            <div>
+                <label for="altura" class="block text-sm font-medium">Altura (cm)</label>
+                <input type="number" id="altura" class="w-full mt-1 p-2 bg-gray-700 rounded-lg" required>
+            </div>
+            <div class="flex space-x-4">
+                <div>
+                    <label for="sexo" class="block text-sm font-medium">Sexo</label>
+                    <select id="sexo" class="w-full mt-1 p-2 bg-gray-700 rounded-lg">
+                        <option value="hombre">Hombre</option>
+                        <option value="mujer">Mujer</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="edad" class="block text-sm font-medium">Edad</label>
+                    <input type="number" id="edad" class="w-full mt-1 p-2 bg-gray-700 rounded-lg" required>
+                </div>
+            </div>
+            <button type="submit" class="w-full py-2 bg-light-slate-blue rounded-lg font-semibold">Guardar</button>
+        </form>
+
+        <div id="resultado" class="mt-6 hidden">
+            <h2 class="text-lg font-bold">Tu IMC es...</h2>
+            <div class="flex items-center justify-between mt-4">
+                <p id="imc" class="text-6xl font-bold"></p>
+                <p id="categoria" class="text-lg"></p>
+            </div>
+            <div class="relative mt-4">
+                <div class="imc-bar">
+                    <div class="imc-segment peso-bajo"></div>
+                    <div class="imc-segment normal"></div>
+                    <div class="imc-segment sobrepeso"></div>
+                    <div class="imc-segment obesidad"></div>
+                </div>
+                <div id="imc-indicator"></div>
+            </div>
+            <div class="flex justify-between mt-2 text-sm">
+                <span>Peso bajo</span>
+                <span>Normal</span>
+                <span>Sobrepeso</span>
+                <span>Obesidad</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<nav class="fixed bottom-0 left-0 w-full bg-white shadow-md md:hidden">
+    <div class="max-w-md mx-auto flex justify-around py-2">
+        <button class="flex flex-col items-center text-gray-600 hover:text-violet-blue active">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+            </svg>                  
+            <span class="text-sm">Inicio</span>
+        </button>
+
+        <button class="view-article flex flex-col items-center text-black hover:text-violet-blue">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.76c0 1.6 1.123 2.994 2.707 3.227 1.068.157 2.148.279 3.238.364.466.037.893.281 1.153.671L12 21l2.652-3.978c.26-.39.687-.634 1.153-.67 1.09-.086 2.17-.208 3.238-.365 1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" />
+            </svg>                  
+            <span class="text-sm">Articulos</span>
+        </button>
+
+        
+        <div class="view-diario flex flex-col items-center text-black hover:text-violet-blue">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0M3.124 7.5A8.969 8.969 0 0 1 5.292 3m13.416 0a8.969 8.969 0 0 1 2.168 4.5" />
+              </svg>                  
+            <span class="text-sm">Notificaciones</span>
+        </div>
+        <a href="profile.html" class="flex flex-col items-center text-black hover:text-violet-blue">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+            </svg>                  
+            <span class="text-sm">Perfil</span>
+        </a>
+        <button href="#" id="logout-button" class="flex flex-col items-center text-black hover:text-violet-blue">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 19.5v-15M5.25 12l6.75-6.75M5.25 12l6.75 6.75" />
+            </svg>                  
+            <span class="text-sm">Cerrar Sesión</span>
+        </button>
+    </div>
+</nav>
+
+<!-- JavaScript: Aquí está el código para manejar el formulario y guardar en Firestore -->
+<script>
+
+        document.getElementById('logout-button').addEventListener('click', function(event) {
+            event.preventDefault();
+
+            firebase.auth().signOut().then(function() {
+                // Redirige al usuario a la página de inicio de sesión
+                loadPartialView('home-app', document.querySelector('.init'), false);
+            }).catch(function(error) {
+                console.error('Error al cerrar sesión:', error);
+            });
+        });
+
+        // Manejadores de eventos para cambiar entre vistas parciales
+        document.querySelector('.view-article').addEventListener('click',function(){
+        loadPartialView('article-main',document.querySelector('.init'), false);
+    })
+
+        document.querySelector('.view-diario').addEventListener('click',function(){
+        loadPartialView('diario-in',document.querySelector('.init'), false);
+    })
+
+    document.getElementById('imcForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        const peso = parseFloat(document.getElementById('peso').value);
+        const altura = parseFloat(document.getElementById('altura').value) / 100; // Convertimos a metros
+        const sexo = document.getElementById('sexo').value;
+        const edad = parseInt(document.getElementById('edad').value);
+
+        const imc = (peso / (altura * altura)).toFixed(1);
+
+        let categoria = '';
+        let imcPosition = 0;
+
+        if (imc < 18.5) {
+            categoria = 'Peso bajo';
+            imcPosition = (imc / 18.5) * 25;
+        } else if (imc < 27.1) {
+            categoria = 'Normal';
+            imcPosition = 25 + ((imc - 18.5) / (27.1 - 18.5)) * 25;
+        } else if (imc < 30.6) {
+            categoria = 'Sobrepeso';
+            imcPosition = 50 + ((imc - 27.1) / (30.6 - 27.1)) * 25;
+        } else {
+            categoria = 'Obesidad de clase I';
+            imcPosition = 75 + ((imc - 30.6) / (35 - 30.6)) * 25; // Asumiendo que el máximo es 35
+        }
+
+        document.getElementById('imc').textContent = imc;
+        document.getElementById('categoria').textContent = categoria;
+        document.getElementById('imc-indicator').style.left = imcPosition + '%';
+        document.getElementById('resultado').classList.remove('hidden');
+
+        // Guardar en Firestore
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                const userId = user.uid; // Obtener el ID único del usuario autenticado
+
+                const userRef = db.collection("users").doc(userId);
+                const imcRecordsRef = userRef.collection("imcRecords");
+
+                imcRecordsRef.add({
+                    peso: peso,
+                    altura: altura * 100, // Convertir a cm
+                    imc: parseFloat(imc),
+                    categoria: categoria,
+                    sexo: sexo,
+                    edad: edad,
+                    fecha: firebase.firestore.FieldValue.serverTimestamp()
+                })
+                .then(() => {
+                    console.log("Registro IMC guardado correctamente.");
+                })
+                .catch((error) => {
+                    console.error("Error al guardar registro IMC: ", error);
+                });
+            } else {
+                console.log("Usuario no autenticado.");
+                // Aquí puedes manejar el caso donde el usuario no está autenticado
+            }
+        });
+    });
+</script>
