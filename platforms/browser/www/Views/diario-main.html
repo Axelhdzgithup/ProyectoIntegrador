@@ -1,0 +1,136 @@
+<body class="bg-gradient-to-r from-purple-500 to-blue-700 text-white min-h-screen flex flex-col items-center">
+
+    <!-- Main Content -->
+    <main class="w-full max-w-md mx-auto mt-4">
+
+
+        <div class="bg-white text-black rounded-lg p-6 mb-6 shadow-md">
+            <h3 class="text-2xl font-bold">Salud Cardíaca</h3>
+            <p class="text-sm mb-4">Último registro: 19:14</p>
+            <div class="flex justify-between mb-4">
+                <div>
+                    <p class="text-3xl font-bold">114 <span class="text-lg">ms</span></p>
+                    <p class="text-sm">HRV</p>
+                </div>
+                <div>
+                    <p class="text-3xl font-bold">80 <span class="text-lg">bpm</span></p>
+                    <p class="text-sm">Pulso</p>
+                </div>
+                <div>
+                    <p class="text-3xl font-bold">46 <span class="text-lg">%</span></p>
+                    <p class="text-sm">Nivel de estrés</p>
+                </div>
+            </div>
+            <button class="w-full bg-pink-500 text-white py-2 rounded-lg font-bold hover:bg-pink-600">Medir Ahora</button>
+        </div>
+
+        <div class="flex flex-col gap-4 mx-4">
+            <!-- Contenedor para el primer bloque (Peso y IMC) -->
+            <div class="bg-gray-800 text-white p-4 rounded-lg flex items-center min-h-[80px]">
+                <div class="flex flex-col items-center w-1/3">
+                    <p class="font-semibold text-lg text-center mb-2">
+                        Peso y IMC
+                    </p>
+                    <img src="../Public/Assets/icons/pesoimc.svg" alt="Peso y IMC" class="w-16 h-16 mb-2">
+                </div>
+                <div class="w-2/3 pl-4">
+                    <p class="text-sm mb-4">
+                        Calcula tu IMC y peso para mantener tu salud en forma.
+                    </p>
+                    <button class="view-imc bg-light-slate-blue text-white font-bold py-2 px-4 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 flex items-center">
+                        Calcular
+                    </button>
+                </div>
+            </div>
+        
+            <!-- Contenedor para el segundo bloque (Azúcar en Sangre) -->
+            <div class="bg-gray-800 text-white p-4 rounded-lg flex items-center min-h-[80px]">
+                <div class="flex flex-col items-center w-1/3">
+                    <img src="../Public/Assets/icons/azucar.svg" alt="Azúcar en sangre" class="w-16 h-16 mb-2">
+                    <p class="font-semibold text-lg text-center mb-2">Azúcar en Sangre</p>
+                </div>
+                <div class="w-2/3 pl-4">
+                    <p class="text-sm mb-4">
+                        Monitorea tus niveles de azúcar para una mejor salud.
+                    </p>
+                    <button class="bg-light-slate-blue text-white font-bold py-2 px-4 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 flex items-center">
+                        Calcular
+                    </button>
+                </div>
+            </div>
+        
+            <!-- Contenedor para el tercer bloque (Presión arterial) -->
+            <div class="bg-gray-800 text-white p-4 rounded-lg mb-28 flex items-center min-h-[80px]">
+                <div class="flex flex-col items-center w-1/3">
+                    <img src="../Public/Assets/icons/IMC.svg" alt="Presión arterial" class="w-16 h-16 mb-2">
+                    <p class="font-semibold text-lg text-center mb-2">Presión arterial</p>
+                </div>
+                <div class="w-2/3 pl-4">
+                    <p class="text-sm mb-4">
+                        Controla tu presión arterial para prevenir riesgos.
+                    </p>
+                    <button class="bg-light-slate-blue text-white font-bold py-2 px-4 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 flex items-center">
+                        Calcular
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+        <!-- Navbar -->
+        <nav class="fixed bottom-0 left-0 w-full bg-white shadow-md md:hidden">
+            <div class="max-w-md mx-auto flex justify-around py-2">
+                <button class="view-home-main flex flex-col items-center text-gray-600 hover:text-violet-blue active">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                    </svg>                  
+                    <span class="text-sm">Inicio</span>
+                </button>
+        
+                <button class="view-article flex flex-col items-center text-black hover:text-violet-blue">
+                    <img src="../Public/Assets/navbar/diario.svg" alt="diario Icon" class="size-6">                     
+                    <span class="text-sm">Articulos</span>
+                </button>
+        
+                
+                <div class="view-diario flex flex-col items-center text-black hover:text-violet-blue">
+                    <img src="../Public/Assets/navbar/bmi.svg" alt="IMC Icon" class="size-6">          
+                    <span class="text-sm">IMC</span>
+                </div>
+                
+                <button id="logout-button" class="flex flex-col items-center text-black hover:text-violet-blue">
+                    <img src="../Public/Assets/navbar/out.svg" alt="IMC Icon" class="size-6">                  
+                    <span class="text-sm">Cerrar Sesión</span>
+                </button>
+            </div>
+        </nav>
+    <script>
+
+            document.getElementById('logout-button').addEventListener('click', function(event) {
+            event.preventDefault();
+
+            firebase.auth().signOut().then(function() {
+                // Redirige al usuario a la página de inicio de sesión
+                loadPartialView('home-app', document.querySelector('.init'), false);
+            }).catch(function(error) {
+                console.error('Error al cerrar sesión:', error);
+            });
+        });
+
+        document.querySelector('.view-imc').addEventListener('click',function(){
+        loadPartialView('imc-view',document.querySelector('.init'), false);
+    })
+
+    document.querySelector('.view-home-main').addEventListener('click',function(){
+        loadPartialView('home-main',document.querySelector('.init'), false);
+    })
+
+    document.querySelector('.view-article').addEventListener('click',function(){
+        loadPartialView('article-main',document.querySelector('.init'), false);
+    })
+
+
+
+    </script>
+
+</body>
