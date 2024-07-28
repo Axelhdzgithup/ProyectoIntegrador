@@ -1,5 +1,17 @@
 <body class="bg-gradient-to-r from-purple-500 to-blue-700 text-white min-h-screen flex flex-col items-center">
 
+    <div class="absolute top-4 right-4">
+        <div class="relative">
+            <button id="user-menu-button" class="flex items-center">
+                <img src="../Public/Assets/icons/fruits.svg" alt="User Icon" class="w-8 h-8">
+            </button>
+            <!-- Dropdown Menu -->
+            <div id="user-dropdown" class="hidden absolute right-0 mt-2 w-48 bg-gray-800 rounded-lg shadow-lg">
+                <button id="logout-button" class="block w-auto text-left px-2 py-2 text-white ">Cerrar Sesión</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Main Content -->
     <main class="w-full max-w-md mx-auto mt-4">
 
@@ -53,7 +65,7 @@
                     <p class="text-sm mb-4">
                         Monitorea tus niveles de azúcar para una mejor salud.
                     </p>
-                    <button class="bg-light-slate-blue text-white font-bold py-2 px-4 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 flex items-center">
+                    <button class="view-azucar bg-light-slate-blue text-white font-bold py-2 px-4 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 flex items-center">
                         Calcular
                     </button>
                 </div>
@@ -98,13 +110,14 @@
                     <span class="text-sm">IMC</span>
                 </div>
                 
-                <button id="logout-button" class="flex flex-col items-center text-black hover:text-violet-blue">
-                    <img src="../Public/Assets/navbar/out.svg" alt="IMC Icon" class="size-6">                  
-                    <span class="text-sm">Cerrar Sesión</span>
-                </button>
             </div>
         </nav>
     <script>
+
+            document.getElementById('user-menu-button').addEventListener('click', function() {
+            const dropdown = document.getElementById('user-dropdown');
+            dropdown.classList.toggle('hidden');
+        });
 
             document.getElementById('logout-button').addEventListener('click', function(event) {
             event.preventDefault();
@@ -129,8 +142,9 @@
         loadPartialView('article-main',document.querySelector('.init'), false);
     })
 
-
-
+    document.querySelector('.view-azucar').addEventListener('click',function(){
+        loadPartialView('azucar-main',document.querySelector('.init'), false);
+    })
     </script>
 
 </body>

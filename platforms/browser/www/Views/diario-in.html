@@ -55,6 +55,93 @@
             </div>
         </div>
     </div>
+
+    <div class="bg-white p-4 rounded-lg shadow-md mt-3 mb-16">
+        <h3 class="text-lg text-black font-bold mb-4">Niveles de Índice de Masa Corporal (IMC)</h3>
+    
+        <!-- Bajo peso -->
+        <div class="mb-4">
+            <div class="flex items-center justify-between">
+                <div>
+                    <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blue-600 bg-blue-200">
+                        Bajo peso
+                    </span>
+                </div>
+                <div class="text-right">
+                    <span class="text-xs font-semibold inline-block text-blue-600">
+                        < 18.5
+                    </span>
+                </div>
+            </div>
+            <div class="overflow-hidden h-2 mb-2 text-xs flex rounded bg-blue-200">
+                <div style="width:15%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500"></div>
+            </div>
+            <p class="text-gray-500 text-sm">Un IMC bajo puede indicar desnutrición y está asociado con un mayor riesgo de deficiencias nutricionales.</p>
+        </div>
+    
+        <!-- Peso normal -->
+        <div class="mb-4">
+            <div class="flex items-center justify-between">
+                <div>
+                    <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-green-600 bg-green-200">
+                        Peso normal
+                    </span>
+                </div>
+                <div class="text-right">
+                    <span class="text-xs font-semibold inline-block text-green-600">
+                        18.5 - 24.9
+                    </span>
+                </div>
+            </div>
+            <div class="overflow-hidden h-2 mb-2 text-xs flex rounded bg-green-200">
+                <div style="width:35%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-500"></div>
+            </div>
+            <p class="text-gray-500 text-sm">Un IMC en este rango generalmente indica un peso saludable y un menor riesgo de enfermedades relacionadas con el peso.</p>
+        </div>
+    
+        <!-- Sobrepeso -->
+        <div class="mb-4">
+            <div class="flex items-center justify-between">
+                <div>
+                    <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-yellow-600 bg-yellow-200">
+                        Sobrepeso
+                    </span>
+                </div>
+                <div class="text-right">
+                    <span class="text-xs font-semibold inline-block text-yellow-600">
+                        25 - 29.9
+                    </span>
+                </div>
+            </div>
+            <div class="overflow-hidden h-2 mb-2 text-xs flex rounded bg-yellow-200">
+                <div style="width:30%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-yellow-500"></div>
+            </div>
+            <p class="text-gray-500 text-sm">Un IMC en este rango indica sobrepeso, lo que puede aumentar el riesgo de enfermedades cardíacas y otras condiciones de salud.</p>
+        </div>
+    
+        <!-- Obesidad -->
+        <div class="mb-4">
+            <div class="flex items-center justify-between">
+                <div>
+                    <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-red-600 bg-red-200">
+                        Obesidad
+                    </span>
+                </div>
+                <div class="text-right">
+                    <span class="text-xs font-semibold inline-block text-red-600">
+                        ≥ 30
+                    </span>
+                </div>
+            </div>
+            <div class="overflow-hidden h-2 mb-2 text-xs flex rounded bg-red-200">
+                <div style="width:20%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-red-500"></div>
+            </div>
+            <p class="text-gray-500 text-sm">Un IMC de 30 o más indica obesidad, una condición que aumenta significativamente el riesgo de problemas de salud graves.</p>
+        </div>
+    
+        <p class="text-gray-500 text-sm">*Los valores del IMC son aproximados y deben ser interpretados en el contexto de otros indicadores de salud.</p>
+    </div>
+    
 </div>
 
 <nav class="fixed bottom-0 left-0 w-full bg-white shadow-md md:hidden">
@@ -76,11 +163,6 @@
             <img src="../Public/Assets/navbar/bmi.svg" alt="IMC Icon" class="size-6">          
             <span class="text-sm">IMC</span>
         </div>
-        
-        <button href="#" id="logout-button" class="flex flex-col items-center text-black hover:text-violet-blue">
-            <img src="../Public/Assets/navbar/out.svg" alt="IMC Icon" class="size-6">                    
-            <span class="text-sm">Salir</span>
-        </button>
     </div>
 </nav>
 
@@ -89,17 +171,6 @@
 
         document.querySelector('.view-back').addEventListener('click', function() {
         loadPartialView('imc-view', document.querySelector('.init'), false);
-        });
-
-        document.getElementById('logout-button').addEventListener('click', function(event) {
-            event.preventDefault();
-
-            firebase.auth().signOut().then(function() {
-                // Redirige al usuario a la página de inicio de sesión
-                loadPartialView('home-app', document.querySelector('.init'), false);
-            }).catch(function(error) {
-                console.error('Error al cerrar sesión:', error);
-            });
         });
 
         // Manejadores de eventos para cambiar entre vistas parciales

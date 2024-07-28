@@ -38,48 +38,91 @@
 
 .imc-bar {
     position: relative;
-    width: 100%;
-    height: 10px;
-    background-color: #ddd;
-    border-radius: 5px;
+    height: 20px;
+    border-radius: 10px;
     overflow: hidden;
-    margin-top: 10px;
+    background-color: #e0e0e0;
 }
 
 .imc-segment {
-    position: absolute;
     height: 100%;
+    float: left;
 }
 
 .peso-bajo {
-    left: 0;
     width: 25%;
     background-color: #FFD700;
+    /* Color para "Bajo" */
 }
 
 .normal {
-    left: 25%;
     width: 25%;
     background-color: #7CFC00;
 }
 
 .sobrepeso {
-    left: 50%;
     width: 25%;
     background-color: #FFA500;
 }
 
 .obesidad {
-    left: 75%;
     width: 25%;
     background-color: #FF6347;
 }
 
 #imc-indicator {
     position: absolute;
-    top: 0;
+    top: -5px;
+    /* Asegúrate de que este valor alinee el indicador correctamente */
+    width: 10px;
+    height: 30px;
+    background-color: #000;
+}
+
+.glucosa-bar {
+    position: relative;
+    height: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #e0e0e0;
+}
+
+.glucosa-segment {
     height: 100%;
-    width: 2px;
-    background-color: red;
+    float: left;
+}
+
+.glucosa-segment.bajo {
+    width: 25%;
+    background-color: #FFD700;
+    /* Color para "Bajo" */
+}
+
+.glucosa-segment.normal {
+    width: 25%;
+    background-color: #7CFC00;
+    /* Color para "Normal" */
+}
+
+.glucosa-segment.prediabetes {
+    width: 25%;
+    background-color: #FFA500;
+    /* Color para "Prediabetes" */
+}
+
+.glucosa-segment.diabetes {
+    width: 25%;
+    background-color: #FF6347;
+    /* Color para "Diabetes" */
+}
+
+#glucosa-indicator {
+    position: absolute;
+    top: -5px;
+    /* Asegúrate de que este valor alinee el indicador correctamente */
+    width: 10px;
+    height: 30px;
+    background-color: #000;
     transform: translateX(-50%);
+    /* Centra el indicador sobre la barra */
 }

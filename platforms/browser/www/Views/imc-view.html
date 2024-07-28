@@ -20,7 +20,7 @@
         </div>
 
         <div class="mb-4">
-            <button id="graficaBtn" class="mr-4 py-2 px-4 bg-blue-600 rounded-lg">Gráfica</button>
+            <button id="graficaBtn" class="mr-4 py-2 px-4 bg-pink-500 rounded-lg">Gráfica</button>
             <button id="historialBtn" class="py-2 px-4 bg-gray-600 rounded-lg">Historial</button>
         </div>
 
@@ -35,29 +35,134 @@
         <button class="view-diario-in w-full py-2 bg-light-slate-blue rounded-lg font-semibold mt-4">+ Añadir</button>
     </div>
 
-
-<div class="bg-gray-800 p-6 rounded-lg shadow-lg mb-8">
-    <h2 class="text-lg font-bold mb-4">Recordatorios de Medicamentos</h2>
-    
-    <form id="medicationForm">
-        <div class="mb-4">
-            <label for="medicationName" class="block mb-2">Nombre del Medicamento</label>
-            <input type="text" id="medicationName" class="w-full p-2 rounded-lg bg-gray-700 text-white">
+    <div id="resultado" class="mt-6 hidden">
+        <h2 class="text-lg font-bold">Tu IMC es...</h2>
+        <div class="flex items-center justify-between mt-4">
+            <p id="imc" class="text-6xl font-bold"></p>
+            <p id="categoria" class="text-lg"></p>
         </div>
-        
-        <div class="mb-4">
-            <label for="medicationTime" class="block mb-2">Hora del Recordatorio</label>
-            <input type="time" id="medicationTime" class="w-full p-2 rounded-lg bg-gray-700 text-white">
+        <div class="relative mt-4">
+            <div class="imc-bar">
+                <div class="imc-segment peso-bajo"></div>
+                <div class="imc-segment normal"></div>
+                <div class="imc-segment sobrepeso"></div>
+                <div class="imc-segment obesidad"></div>
+            </div>
+            <div id="imc-indicator"></div>
         </div>
-        
-        <button type="button" id="addReminderBtn" class="w-full py-2 bg-light-slate-blue rounded-lg font-semibold">Añadir Recordatorio</button>
-    </form>
-    
-    <div id="remindersList" class="mt-4">
-        <h3 class="text-md font-semibold mb-2">Recordatorios:</h3>
-        <ul id="remindersUl" class="list-disc pl-5"></ul>
+        <div class="flex justify-between mt-2 text-sm">
+            <span>Peso bajo</span>
+            <span>Normal</span>
+            <span>Sobrepeso</span>
+            <span>Obesidad</span>
+        </div>
     </div>
-</div>
+
+    <div class="bg-white p-4 rounded-lg shadow-md mt-3">
+        <h3 class="text-lg text-black font-bold mb-4">Composición del Cuerpo Humano</h3>
+    
+        <!-- Agua Corporal -->
+        <div class="mb-4">
+            <div class="flex items-center justify-between">
+                <div>
+                    <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blue-600 bg-blue-200 m-1">
+                        Agua Corporal
+                    </span>
+                </div>
+                <div class="text-right">
+                    <span class="text-xs font-semibold inline-block text-blue-600">
+                        60%
+                    </span>
+                </div>
+            </div>
+            <div class="overflow-hidden h-2 mb-2 text-xs flex rounded bg-blue-200">
+                <div style="width:60%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500"></div>
+            </div>
+            <p class="text-gray-500 text-sm">El agua es esencial para todas las funciones corporales, incluyendo la regulación de la temperatura y la eliminación de desechos.</p>
+        </div>
+    
+        <!-- Músculo Esquelético -->
+        <div class="mb-4">
+            <div class="flex items-center justify-between">
+                <div>
+                    <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-green-600 bg-green-200">
+                        Músculo Esquelético
+                    </span>
+                </div>
+                <div class="text-right">
+                    <span class="text-xs font-semibold inline-block text-green-600">
+                        40%
+                    </span>
+                </div>
+            </div>
+            <div class="overflow-hidden h-2 mb-2 text-xs flex rounded bg-green-200">
+                <div style="width:40%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-500"></div>
+            </div>
+            <p class="text-gray-500 text-sm">Los músculos esqueléticos son cruciales para el movimiento, la postura y la producción de calor.</p>
+        </div>
+    
+        <!-- Grasa Corporal -->
+        <div class="mb-4">
+            <div class="flex items-center justify-between">
+                <div>
+                    <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-yellow-600 bg-yellow-200">
+                        Grasa Corporal
+                    </span>
+                </div>
+                <div class="text-right">
+                    <span class="text-xs font-semibold inline-block text-yellow-600">
+                        20%
+                    </span>
+                </div>
+            </div>
+            <div class="overflow-hidden h-2 mb-2 text-xs flex rounded bg-yellow-200">
+                <div style="width:20%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-yellow-500"></div>
+            </div>
+            <p class="text-gray-500 text-sm">La grasa corporal actúa como reserva de energía y aislante térmico, además de proteger órganos internos.</p>
+        </div>
+    
+        <!-- Minerales -->
+        <div class="mb-4">
+            <div class="flex items-center justify-between">
+                <div>
+                    <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-gray-600 bg-gray-200">
+                        Minerales
+                    </span>
+                </div>
+                <div class="text-right">
+                    <span class="text-xs font-semibold inline-block text-gray-600">
+                        5%
+                    </span>
+                </div>
+            </div>
+            <div class="overflow-hidden h-2 mb-2 text-xs flex rounded bg-gray-200">
+                <div style="width:5%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-gray-500"></div>
+            </div>
+            <p class="text-gray-500 text-sm">Los minerales son esenciales para la formación de huesos, la transmisión nerviosa y otras funciones corporales.</p>
+        </div>
+    
+        <p class="text-gray-500 text-sm">*Los porcentajes son aproximados y pueden variar según la persona.</p>
+    </div>
+    
+    
+    
+    
+
+    <div class="bg-green-600 p-4 rounded-lg shadow-md mt-6">
+        <h3 class="text-lg font-bold mb-4">Consejos de Salud</h3>
+        <ul class="list-disc pl-5">
+            <li>Beber al menos 8 vasos de agua al día.</li>
+            <li>Realizar ejercicio al menos 30 minutos diarios.</li>
+            <li>Evitar comidas procesadas y altas en azúcares.</li>
+        </ul>
+    </div>
+
+    <div class="bg-blue-100 p-4 rounded-lg shadow-md mt-6">
+        <h3 class="text-lg text-black font-bold mb-4">Historias de Éxito</h3>
+        <p class="text-sm text-gray-700">"Desde que empecé a seguir estos consejos, he perdido 10 kg y me siento mucho más saludable y enérgico." - Juan P.</p>
+    </div>
+
+
 </div>
 
 <nav class="fixed bottom-0 left-0 w-full bg-white shadow-md md:hidden">
@@ -79,11 +184,6 @@
             <img src="../Public/Assets/navbar/bmi.svg" alt="IMC Icon" class="size-6">          
             <span class="text-sm">IMC</span>
         </div>
-        
-        <button id="logout-button" class="flex flex-col items-center text-black hover:text-violet-blue">
-            <img src="../Public/Assets/navbar/out.svg" alt="IMC Icon" class="size-6">                  
-            <span class="text-sm">Cerrar Sesión</span>
-        </button>
     </div>
 </nav>
 
@@ -228,70 +328,4 @@
         document.getElementById('grafica').classList.remove('hidden');
         document.getElementById('historial').classList.add('hidden');
     }
-
-    // Función para cerrar sesión
-    document.getElementById('logout-button').addEventListener('click', function(event) {
-        event.preventDefault();
-        auth.signOut().then(() => {
-            console.log('Sesión cerrada correctamente.');
-            // Redirigir al usuario a la página de inicio de sesión
-            loadPartialView('home-app', document.querySelector('.init'), false);
-        }).catch((error) => {
-            console.error('Error al cerrar sesión:', error);
-        });
-    });
-</script>
-<script>
- 
- document.addEventListener('DOMContentLoaded', function() {
-    const addReminderBtn = document.getElementById('addReminderBtn');
-    const remindersUl = document.getElementById('remindersUl');
-
-    addReminderBtn.addEventListener('click', function() {
-        const medicationName = document.getElementById('medicationName').value;
-        const medicationTime = document.getElementById('medicationTime').value;
-
-        if (medicationName && medicationTime) {
-            const li = document.createElement('li');
-            li.textContent = `${medicationName} - ${medicationTime}`;
-            remindersUl.appendChild(li);
-
-            // Aquí puedes agregar la lógica para guardar el recordatorio en la base de datos de Firebase o en el almacenamiento local
-
-            // Limpiar el formulario
-            document.getElementById('medicationForm').reset();
-        } else {
-            alert('Por favor, completa todos los campos.');
-        }
-    });
-});
-
-
-addReminderBtn.addEventListener('click', function() {
-    const medicationName = document.getElementById('medicationName').value;
-    const medicationTime = document.getElementById('medicationTime').value;
-
-    if (medicationName && medicationTime) {
-        const li = document.createElement('li');
-        li.textContent = `${medicationName} - ${medicationTime}`;
-        remindersUl.appendChild(li);
-
-        // Guardar el recordatorio en Firestore
-        db.collection('reminders').add({
-            medicationName: medicationName,
-            medicationTime: medicationTime,
-            userId: firebase.auth().currentUser.uid // Suponiendo que estás usando autenticación
-        }).then(() => {
-            console.log('Recordatorio añadido correctamente.');
-        }).catch((error) => {
-            console.error('Error añadiendo recordatorio: ', error);
-        });
-
-        // Limpiar el formulario
-        document.getElementById('medicationForm').reset();
-    } else {
-        alert('Por favor, completa todos los campos.');
-    }
-});
-
 </script>

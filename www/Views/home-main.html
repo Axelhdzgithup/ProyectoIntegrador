@@ -79,25 +79,12 @@
                 <img src="../Public/Assets/navbar/bmi.svg" alt="IMC Icon" class="size-6">          
                 <span class="text-sm">IMC</span>
             </div>
-            
-            <button href="#" id="logout-button" class="flex flex-col items-center text-black hover:text-violet-blue">
-                <img src="../Public/Assets/navbar/out.svg" alt="IMC Icon" class="size-6">                    
-                <span class="text-sm">Salir</span>
-            </button>
+        
         </div>
     </nav>
 
     <script>
-        document.getElementById('logout-button').addEventListener('click', function(event) {
-            event.preventDefault();
 
-            firebase.auth().signOut().then(function() {
-                // Redirige al usuario a la página de inicio de sesión
-                loadPartialView('home-app', document.querySelector('.init'), false);
-            }).catch(function(error) {
-                console.error('Error al cerrar sesión:', error);
-            });
-        });
 
         // Manejadores de eventos para cambiar entre vistas parciales
         document.querySelector('.view-article').addEventListener('click',function(){

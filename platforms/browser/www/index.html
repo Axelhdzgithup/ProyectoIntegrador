@@ -58,29 +58,6 @@
                 }
             });
         }
-
-        function hideNavBar() {
-            var navBar = document.getElementById("navBar");
-            if (navBar) {
-                navBar.style.display = "none";
-            }
-        }
-
-        function showNavBar() {
-            var navBar = document.getElementById("navBar");
-            if (navBar) {
-                navBar.style.display = "flex";
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            // Ensure nav-bar is loaded only once
-            if (!document.querySelector('.nav-bar').innerHTML.includes('nav-bar content')) {
-                loadPartialView('nav-bar', document.querySelector('.nav-bar'), false);
-            }
-        }); 
-
-        loadPartialView('article', document.querySelector('.init'), false);
     </script>
     
  
