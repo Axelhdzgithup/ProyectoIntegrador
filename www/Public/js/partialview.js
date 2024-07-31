@@ -1,5 +1,4 @@
 function loadPartialView(viewName, divClass = null, isAppend = false) {
-    var showNavBarViews = ['home-main', 'ganado', 'profile']; // Lista de vistas en las que se mostrará el nav-bar
 
     $.ajax({
         url: 'Views/' + viewName + '.html',
@@ -12,12 +11,6 @@ function loadPartialView(viewName, divClass = null, isAppend = false) {
 
             isAppend ? $(divClass).append(data) : $(divClass).html(data);
 
-            // Si la vista está en la lista de vistas a mostrar, muestra el nav-bar
-            if (showNavBarViews.includes(viewName)) {
-                showNavBar();
-            } else {
-                hideNavBar();
-            }
         },
         error: function (xhr, status, error) {
             console.error('Error al cargar la vista parcial:', error);

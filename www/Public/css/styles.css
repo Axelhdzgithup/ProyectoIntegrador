@@ -126,3 +126,53 @@
     transform: translateX(-50%);
     /* Centra el indicador sobre la barra */
 }
+
+
+
+.presion-bar {
+    position: relative;
+    height: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #e0e0e0;
+}
+
+.presion-segment {
+    height: 100%;
+    float: left;
+}
+
+.presion-segment.bajo {
+    width: 25%;
+    background-color: #FFD700;
+    /* Color para "Bajo" */
+}
+
+.presion-segment.normal {
+    width: 25%;
+    background-color: #7CFC00;
+    /* Color para "Normal" */
+}
+
+.presion-segment.prehipertension {
+    width: 25%;
+    background-color: #FFA500;
+    /* Color para "Prediabetes" */
+}
+
+.presion-segment.hipertension {
+    width: 25%;
+    background-color: #FF6347;
+    /* Color para "Diabetes" */
+}
+
+#presion-indicator {
+    position: absolute;
+    top: -5px;
+    /* Asegúrate de que este valor alinee el indicador correctamente */
+    width: 10px;
+    height: 30px;
+    background-color: #000;
+    transform: translateX(-50%);
+    /* Centra el indicador sobre la barra */
+}

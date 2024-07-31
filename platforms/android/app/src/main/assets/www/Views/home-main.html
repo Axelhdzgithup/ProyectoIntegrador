@@ -1,4 +1,4 @@
-<body class="font-haken bg-gray-100">
+<body class="font-haken bg-gray-900">
    
     <section class="w-[98%] max-w-md mx-auto bg-white shadow-2xl md:flex md:rounded-2xl md:max-w-4xl mb-16">
 
@@ -79,25 +79,12 @@
                 <img src="../Public/Assets/navbar/bmi.svg" alt="IMC Icon" class="size-6">          
                 <span class="text-sm">IMC</span>
             </div>
-            
-            <button href="#" id="logout-button" class="flex flex-col items-center text-black hover:text-violet-blue">
-                <img src="../Public/Assets/navbar/out.svg" alt="IMC Icon" class="size-6">                    
-                <span class="text-sm">Salir</span>
-            </button>
+        
         </div>
     </nav>
 
     <script>
-        document.getElementById('logout-button').addEventListener('click', function(event) {
-            event.preventDefault();
 
-            firebase.auth().signOut().then(function() {
-                // Redirige al usuario a la página de inicio de sesión
-                loadPartialView('home-app', document.querySelector('.init'), false);
-            }).catch(function(error) {
-                console.error('Error al cerrar sesión:', error);
-            });
-        });
 
         // Manejadores de eventos para cambiar entre vistas parciales
         document.querySelector('.view-article').addEventListener('click',function(){
@@ -105,7 +92,7 @@
     })
 
         document.querySelector('.view-diario').addEventListener('click',function(){
-        loadPartialView('imc-view',document.querySelector('.init'), false);
+        loadPartialView('diario-main',document.querySelector('.init'), false);
     })
         document.querySelector('.view-mental').addEventListener('click',function(){
         loadPartialView('mental-in',document.querySelector('.init'), false);

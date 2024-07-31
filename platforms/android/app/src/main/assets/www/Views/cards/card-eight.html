@@ -1,4 +1,11 @@
 <body class="font-hanken bg-cream text-gray-900">
+    
+    <div class="flex items-center pt-7 pl-4">
+        <button class="view-back absolute">
+            <img class="w-10" src="Public/Assets/icons/backk.svg" alt="">
+        </button>
+    </div>
+
     <div class="container mx-auto p-4 mb-16">
         <div class="flex justify-center items-center mb-8">
             <div class="flex items-center">
@@ -107,6 +114,10 @@
     document.querySelector('.view-home-main').addEventListener('click',function(){
         loadPartialView('home-main',document.querySelector('.init'), false);
     })
+
+    document.querySelector('.view-back').addEventListener('click', function() {
+        loadPartialView('article-main', document.querySelector('.init'), false);
+    });
     </script>
 
 </body>

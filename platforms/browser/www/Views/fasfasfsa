@@ -1,0 +1,131 @@
+<body class="bg-gray-900 text-white">
+    <div class="bg-gray-800 p-6 rounded-lg shadow-lg mb-8 mt-14">
+        <h2 class="text-light-slate-blue font-bold text-2xl mb-6">Presión Arterial</h2>
+    
+        <div class="mb-6">
+            <button id="graficaBtn" class="mr-4 py-2 px-4 bg-pink-500 rounded-lg">Gráfica</button>
+            <button id="historialBtn" class="py-2 px-4 bg-gray-600 rounded-lg">Historial</button>
+        </div>
+    
+        <!-- Sección de la gráfica -->
+        <div id="grafica" class="hidden mt-6">
+            <canvas id="presionChart"></canvas>
+        </div>
+    
+        <!-- Sección del historial -->
+        <div id="historial" class="hidden mt-6">
+            <ul id="historialList" class="list-disc pl-5"></ul>
+        </div>
+    
+        <button class="view-diario-in w-full py-2 bg-light-slate-blue rounded-lg font-semibold mt-4">+ Añadir</button>
+    </div>
+
+    <script>
+        document.getElementById('historialBtn').addEventListener('click', function() {
+            document.getElementById('historial').classList.remove('hidden');
+            document.getElementById('grafica').classList.add('hidden');
+            mostrarHistorial();
+        });
+
+        document.getElementById('graficaBtn').addEventListener('click', function() {
+            document.getElementById('grafica').classList.remove('hidden');
+            document.getElementById('historial').classList.add('hidden');
+            mostrarGrafica();
+        });
+
+        // Function to show the history of records
+        function mostrarHistorial() {
+            const historialList = document.getElementById('historialList');
+            historialList.innerHTML = ''; // Clear the list before adding new items
+
+            auth.onAuthStateChanged((user) => {
+                if (user) {
+                    const userId = user.uid;
+
+                    const bloodPressureRecordsRef = db.collection("users").doc(userId).collection("bloodPressureRecords");
+
+                    bloodPressureRecordsRef.orderBy("fecha").get().then((querySnapshot) => {
+                        querySnapshot.forEach((doc) => {
+                            const registro = doc.data();
+                            const listItem = document.createElement('li');
+                            listItem.textContent = `Fecha: ${registro.fecha.toDate().toLocaleDateString()} - ${registro.sistolica}/${registro.diastolica} mmHg (${registro.categoria})`;
+                            historialList.appendChild(listItem);
+                        });
+                    }).catch((error) => {
+                        console.error("Error al obtener historial de presión arterial: ", error);
+                    });
+                } else {
+                    console.log("Usuario no autenticado.");
+                }
+            });
+        }
+
+        // Function to show the chart
+        function mostrarGrafica() {
+            const ctx = document.getElementById('presionChart').getContext('2d');
+
+            auth.onAuthStateChanged((user) => {
+                if (user) {
+                    const userId = user.uid;
+
+                    const bloodPressureRecordsRef = db.collection("users").doc(userId).collection("bloodPressureRecords");
+
+                    bloodPressureRecordsRef.orderBy("fecha").get().then((querySnapshot) => {
+                        const fechas = [];
+                        const sistolicas = [];
+                        const diastolicas = [];
+
+                        querySnapshot.forEach((doc) => {
+                            const registro = doc.data();
+                            fechas.push(registro.fecha.toDate().toLocaleDateString());
+                            sistolicas.push(registro.sistolica);
+                            diastolicas.push(registro.diastolica);
+                        });
+
+                        new Chart(ctx, {
+                            type: 'line',
+                            data: {
+                                labels: fechas,
+                                datasets: [
+                                    {
+                                        label: 'Presión Sistólica',
+                                        data: sistolicas,
+                                        borderColor: 'rgba(255, 99, 132, 1)',
+                                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                                        fill: false
+                                    },
+                                    {
+                                        label: 'Presión Diastólica',
+                                        data: diastolicas,
+                                        borderColor: 'rgba(54, 162, 235, 1)',
+                                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                                        fill: false
+                                    }
+                                ]
+                            },
+                            options: {
+                                responsive: true,
+                                plugins: {
+                                    legend: {
+                                        position: 'top',
+                                    },
+                                    tooltip: {
+                                        callbacks: {
+                                            label: function(tooltipItem) {
+                                                return `${tooltipItem.dataset.label}: ${tooltipItem.raw} mmHg`;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        });
+                    }).catch((error) => {
+                        console.error("Error al obtener datos para la gráfica: ", error);
+                    });
+                } else {
+                    console.log("Usuario no autenticado.");
+                }
+            });
+        }
+    </script>
+</body>

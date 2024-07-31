@@ -81,7 +81,7 @@
                     <p class="text-sm mb-4">
                         Controla tu presión arterial para prevenir riesgos.
                     </p>
-                    <button class="bg-light-slate-blue text-white font-bold py-2 px-4 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 flex items-center">
+                    <button class="view-arterial bg-light-slate-blue text-white font-bold py-2 px-4 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 flex items-center">
                         Calcular
                     </button>
                 </div>
@@ -144,6 +144,10 @@
 
     document.querySelector('.view-azucar').addEventListener('click',function(){
         loadPartialView('azucar-main',document.querySelector('.init'), false);
+    })
+
+    document.querySelector('.view-arterial').addEventListener('click',function(){
+        loadPartialView('arterial-main',document.querySelector('.init'), false);
     })
     </script>
 

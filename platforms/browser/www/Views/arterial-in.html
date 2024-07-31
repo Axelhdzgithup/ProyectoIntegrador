@@ -1,0 +1,230 @@
+<body class="bg-gray-900">
+    <div class="container mx-auto p-4 text-white">
+        <div class="flex items-center mb-4">
+            <button class="view-back absolute">
+                <img class="w-10" src="Public/Assets/icons/backk.svg" alt="">
+            </button>
+            <h2 class="text-light-slate-blue font-bold text-2xl text-center w-full">Presión Arterial</h2>
+        </div>
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg mt-14">
+            <form id="bloodPressureForm" class="space-y-4">
+                <div>
+                    <label for="sistolica" class="block text-sm font-medium">Presión Sistólica (mmHg)</label>
+                    <input type="number" id="sistolica" class="w-full mt-1 p-2 bg-gray-700 rounded-lg" required>
+                </div>
+                <div>
+                    <label for="diastolica" class="block text-sm font-medium">Presión Diastólica (mmHg)</label>
+                    <input type="number" id="diastolica" class="w-full mt-1 p-2 bg-gray-700 rounded-lg" required>
+                </div>
+                <button type="submit" class="w-full py-2 bg-light-slate-blue rounded-lg font-semibold">Guardar</button>
+            </form>
+    
+            <div id="resultado-presion" class="mt-6 hidden">
+                <h2 class="text-lg font-bold">Tu presión arterial es...</h2>
+                <div class="flex items-center justify-between mt-4">
+                    <p id="presion-valor" class="text-6xl font-bold"></p>
+                    <p id="presion-categoria" class="text-lg"></p>
+                </div>
+                <div class="relative mt-4">
+                    <div class="presion-bar">
+                        <div class="presion-segment bajo"></div>
+                        <div class="presion-segment normal"></div>
+                        <div class="presion-segment prehipertension"></div>
+                        <div class="presion-segment hipertension"></div>
+                    </div>
+                    <div id="presion-indicator"></div>
+                </div>
+                <div class="flex justify-between mt-2 text-sm">
+                    <span>Bajo</span>
+                    <span>Normal</span>
+                    <span>Prehipertensión</span>
+                    <span>Hipertensión</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white p-4 rounded-lg shadow-md mt-3 mb-16">
+            <h3 class="text-lg text-black font-bold mb-4">Niveles de Presión Arterial</h3>
+
+            <!-- Bajo -->
+            <div class="mb-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blue-600 bg-blue-200">
+                            Bajo
+                        </span>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-xs font-semibold inline-block text-blue-600">
+                            < 90/60 mmHg
+                        </span>
+                    </div>
+                </div>
+                <div class="overflow-hidden h-2 mb-2 text-xs flex rounded bg-blue-200">
+                    <div style="width:15%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500"></div>
+                </div>
+                <p class="text-gray-500 text-sm">Una presión arterial baja puede causar mareos y fatiga.</p>
+            </div>
+
+            <!-- Normal -->
+            <div class="mb-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-green-600 bg-green-200">
+                            Normal
+                        </span>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-xs font-semibold inline-block text-green-600">
+                            90/60 - 120/80 mmHg
+                        </span>
+                    </div>
+                </div>
+                <div class="overflow-hidden h-2 mb-2 text-xs flex rounded bg-green-200">
+                    <div style="width:25%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-500"></div>
+                </div>
+                <p class="text-gray-500 text-sm">Una presión arterial en este rango es generalmente considerada saludable.</p>
+            </div>
+
+            <!-- Prehipertensión -->
+            <div class="mb-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-yellow-600 bg-yellow-200">
+                            Prehipertensión
+                        </span>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-xs font-semibold inline-block text-yellow-600">
+                            121/81 - 139/89 mmHg
+                        </span>
+                    </div>
+                </div>
+                <div class="overflow-hidden h-2 mb-2 text-xs flex rounded bg-yellow-200">
+                    <div style="width:20%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-yellow-500"></div>
+                </div>
+                <p class="text-gray-500 text-sm">La prehipertensión puede ser un indicativo de riesgo de hipertensión en el futuro.</p>
+            </div>
+
+            <!-- Hipertensión -->
+            <div class="mb-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-red-600 bg-red-200">
+                            Hipertensión
+                        </span>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-xs font-semibold inline-block text-red-600">
+                            ≥ 140/90 mmHg
+                        </span>
+                    </div>
+                </div>
+                <div class="overflow-hidden h-2 mb-2 text-xs flex rounded bg-red-200">
+                    <div style="width:40%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-red-500"></div>
+                </div>
+                <p class="text-gray-500 text-sm">La hipertensión es una condición crónica que requiere manejo médico y cambios en el estilo de vida.</p>
+            </div>
+
+            <p class="text-gray-500 text-sm">*Los valores y rangos pueden variar según las directrices de salud y la evaluación médica.</p>
+        </div>
+    </div>
+
+    <nav class="fixed bottom-0 left-0 w-full bg-white shadow-md md:hidden">
+        <div class="max-w-md mx-auto flex justify-around py-2">
+            <button class="view-home-main flex flex-col items-center text-gray-600 hover:text-violet-blue active">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                </svg>                  
+                <span class="text-sm">Inicio</span>
+            </button>
+    
+            <button class="view-article flex flex-col items-center text-black hover:text-violet-blue">
+                <img src="../Public/Assets/navbar/diario.svg" alt="diario Icon" class="size-6">                     
+                <span class="text-sm">Articulos</span>
+            </button>
+    
+            
+            <div class="view-diario flex flex-col items-center text-black hover:text-violet-blue">
+                <img src="../Public/Assets/navbar/bmi.svg" alt="IMC Icon" class="size-6">          
+                <span class="text-sm">IMC</span>
+            </div>
+        </div>
+    </nav>
+    
+    <script>
+        document.querySelector('.view-back').addEventListener('click', function() {
+            loadPartialView('arterial-main', document.querySelector('.init'), false);
+        });
+
+        document.querySelector('.view-article').addEventListener('click',function(){
+        loadPartialView('article-main',document.querySelector('.init'), false);
+    })
+
+    document.querySelector('.view-home-main').addEventListener('click',function(){
+        loadPartialView('home-main',document.querySelector('.init'), false);
+    })
+
+        document.querySelector('.view-diario').addEventListener('click',function(){
+        loadPartialView('diario-in',document.querySelector('.init'), false);
+    })
+    
+        document.getElementById('bloodPressureForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+    
+            const sistolica = parseFloat(document.getElementById('sistolica').value);
+            const diastolica = parseFloat(document.getElementById('diastolica').value);
+    
+            let categoria = '';
+            let presionPosition = 0;
+    
+            if (sistolica < 90 || diastolica < 60) {
+                categoria = 'Bajo';
+                presionPosition = (sistolica / 90) * 25;
+            } else if (sistolica <= 120 && diastolica <= 80) {
+                categoria = 'Normal';
+                presionPosition = 25 + ((sistolica - 90) / (120 - 90)) * 25;
+            } else if (sistolica <= 139 && diastolica <= 89) {
+                categoria = 'Prehipertensión';
+                presionPosition = 50 + ((sistolica - 121) / (139 - 121)) * 25;
+            } else {
+                categoria = 'Hipertensión';
+                presionPosition = 75 + ((sistolica - 140) / (200 - 140)) * 25; // Asumiendo que el máximo es 200
+            }
+    
+            document.getElementById('presion-valor').textContent = `${sistolica}/${diastolica}`;
+            document.getElementById('presion-categoria').textContent = categoria;
+    
+            const indicator = document.getElementById('presion-indicator');
+            indicator.style.left = `calc(${presionPosition}% - 8px)`;
+    
+            const resultadoPresion = document.getElementById('resultado-presion');
+            resultadoPresion.classList.remove('hidden');    
+             // Guardar en Firestore
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                const userId = user.uid;
+
+                const userRef = db.collection("users").doc(userId);
+                const bloodPressureRecordsRef = userRef.collection("bloodPressureRecords");
+
+                bloodPressureRecordsRef.add({
+                    sistolica: sistolica,
+                    diastolica: diastolica,
+                    categoria: categoria,
+                    fecha: firebase.firestore.FieldValue.serverTimestamp()
+                })
+                .then(() => {
+                    console.log("Registro de presión arterial guardado correctamente.");
+                })
+                .catch((error) => {
+                    console.error("Error al guardar registro de presión arterial: ", error);
+                });
+            } else {
+                console.log("Usuario no autenticado.");
+                // Aquí puedes manejar el caso donde el usuario no está autenticado
+            }
+        });
+        });
+    </script>
+</body>
